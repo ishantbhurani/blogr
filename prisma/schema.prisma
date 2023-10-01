@@ -7,3 +7,13 @@ datasource db {
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
+
+model Post {
+  id         String   @id @default(dbgenerated("concat('post_', replace(cast(gen_random_uuid() as Text), '-', ''))")) @db.Text
+  title      String
+  content    String
+  bannerUrl  String?
+  categories String[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
