@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import { hash } from 'bcrypt'
 
 const prisma = new PrismaClient()
 
@@ -10,7 +11,7 @@ async function main() {
     },
     update: {},
     create: {
-      name: 'Ivan',
+      name: 'Test User',
       email: 'test@test.com',
       password,
     },
@@ -28,10 +29,11 @@ async function main() {
       
       Donec sit amet egestas elit, volutpat aliquam eros. Suspendisse bibendum, velit eget egestas tincidunt, libero lorem mattis lacus, ac condimentum est metus sit amet orci. Duis quis sapien sed dolor gravida porta. Morbi vel sapien ornare, ornare erat fringilla, volutpat ipsum. Nunc efficitur ex vel mauris aliquet rutrum. Vivamus nec tempus velit. Ut cursus vel lacus vel mollis. Curabitur nunc neque, malesuada a lacinia eget, viverra a turpis. Duis sit amet eleifend urna, ut porta libero. Aenean volutpat bibendum ex ac tincidunt. Quisque porttitor ante accumsan pretium lobortis.`,
       categories: ['Science'],
+      authorId: user.id,
     },
   })
 
-  console.log(newPost)
+  console.log({ user, newPost })
 }
 
 main()
