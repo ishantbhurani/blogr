@@ -8,6 +8,16 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+model User {
+  id        String   @id @default(dbgenerated("concat('usr_', replace(cast(gen_random_uuid() as Text), '-', ''))")) @db.Text
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]
+}
+
 model Post {
   id         String   @id @default(dbgenerated("concat('post_', replace(cast(gen_random_uuid() as Text), '-', ''))")) @db.Text
   title      String
@@ -16,4 +26,6 @@ model Post {
   categories String[]
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  author     User     @relation(fields: [authorId], references: [id])
+  authorId   String   @db.Text
 }

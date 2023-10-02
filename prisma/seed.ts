@@ -3,6 +3,18 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 async function main() {
+  const password = await hash('test', 12)
+  const user = await prisma.user.upsert({
+    where: {
+      email: 'test@test.com',
+    },
+    update: {},
+    create: {
+      name: 'Ivan',
+      email: 'test@test.com',
+      password,
+    },
+  })
   const newPost = await prisma.post.create({
     data: {
       title: '10 of the biggest — and smallest — scientific mysteries',
