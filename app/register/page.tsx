@@ -1,7 +1,12 @@
 import Link from 'next/link'
 import RegisterForm from './form'
+import { getServerSession } from 'next-auth'
+import { redirect } from 'next/navigation'
 
-export default function RegistePage() {
+export default async function RegistePage() {
+  const session = await getServerSession()
+  if (session) return redirect('/')
+
   return (
     <div className='min-h-screen bg-slate-100 flex items-center justify-center'>
       <div className='sm:bg-white sm:shadow-xl rounded-xl px-8 pb-8 pt-12 space-y-12'>
