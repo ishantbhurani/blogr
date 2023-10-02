@@ -5,7 +5,7 @@ import { Skeleton } from './ui/skeleton'
 export default function PostCard({ id, title, content, createdAt }: Post) {
   return (
     <li className='max-w-sm rounded opacity-80 shadow-sm transition hover:opacity-100 focus-within:opacity-100 sm:max-w-none sm:border-t sm:shadow-none'>
-      <Link href={`/post/${id}`}>
+      <Link href={`/posts/${id}`}>
         <div className='grid grid-cols-1 sm:grid-cols-3 sm:gap-2'>
           <Skeleton className='h-48 sm:h-36 sm:rounded-t-none' />
           <div className='col-span-2 p-4 flex flex-col justify-between gap-2 sm:gap-0'>
